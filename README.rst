@@ -118,12 +118,15 @@ Testing
 
     > pytest --cov=falcon_provider_memcache --cov-report=term-missing tests/
 
-.. |coverage| image:: https://codecov.io/gh/bcsummers/falcon-provider-memcache/branch/master/graph/badge.svg?token=prpmecioDm
+.. |build| image:: https://github.com/bcsummers/falcon-provider-memcache/workflows/build/badge.svg
+    :target: https://github.com/bcsummers/falcon-provider-memcache/actions
+
+.. |coverage| image:: https://codecov.io/gh/bcsummers/falcon-provider-memcache/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/bcsummers/falcon-provider-memcache
 
 .. |code-style| image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/python/black
 
 .. |pre-commit| image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
-   :target: https://github.com/pre-commit/pre-commit
-   :alt: pre-commit
+    :target: https://github.com/pre-commit/pre-commit
+    :alt: pre-commit
