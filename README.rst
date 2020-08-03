@@ -2,7 +2,7 @@
 falcon-provider-memcache
 ========================
 
-|coverage| |code-style| |pre-commit|
+|build| |coverage| |code-style| |pre-commit|
 
 A falcon hook and middleware provider for memcache.
 

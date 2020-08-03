@@ -117,6 +117,12 @@ jobs:
           MEMCACHE_HOST: "0.0.0.0"
           MEMCACHE_PORT: ${{ job.services.memcached.ports[11211] }}
 
+      - name: Upload coverage.xml to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: true
+
       # Artifact upload
       - name: Upload pytest test results
         uses: actions/upload-artifact@v2
