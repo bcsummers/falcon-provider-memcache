@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: [3.8]
 
     steps:
@@ -118,12 +119,12 @@ jobs:
           MEMCACHE_HOST: "0.0.0.0"
           MEMCACHE_PORT: ${{ job.services.memcached.ports[11211] }}
 
-      # Upload file to codecov
-      - name: Upload coverage.xml to codecov
-        uses: ./codecov-action@v1
-        with:
-          file: ${{ github.workspace }}/coverage.xml
-          fail_ci_if_error: true
+      # # Upload file to codecov
+      # - name: Upload coverage.xml to codecov
+      #   uses: ./codecov-action@v1
+      #   with:
+      #     file: ${{ github.workspace }}/coverage.xml
+      #     fail_ci_if_error: true
 
       # Artifact upload
       - name: Upload pytest test results
