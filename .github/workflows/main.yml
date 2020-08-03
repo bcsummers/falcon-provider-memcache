@@ -107,6 +107,7 @@ jobs:
           pytest
           -s
           --cov=falcon_provider_memcache
+          --cov-report=xml
           --cov-report=html:artifacts/cov-report-${{ matrix.python-version }}
           --cov-report=term
           --html=artifacts/test-report-${{ matrix.python-version }}.html
@@ -117,10 +118,11 @@ jobs:
           MEMCACHE_HOST: "0.0.0.0"
           MEMCACHE_PORT: ${{ job.services.memcached.ports[11211] }}
 
+      # Upload file to codecov
       - name: Upload coverage.xml to codecov
-        uses: codecov/codecov-action@v1
+        uses: ./codecov-action@v1
         with:
-          file: ./coverage.xml
+          file: ${{ github.workspace }}/coverage.xml
           fail_ci_if_error: true
 
       # Artifact upload
