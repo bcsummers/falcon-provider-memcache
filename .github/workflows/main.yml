@@ -94,6 +94,9 @@ jobs:
           --junitxml=junit/test-results-${{ matrix.os }}-${{ matrix.python-version }}.xml
           --self-contained-html
           tests/
+        env:
+          MEMCACHE_HOST: memcached
+          MEMCACHE_PORT: 11211
 
       # Upload file to codecov
       - name: Upload to codecov
