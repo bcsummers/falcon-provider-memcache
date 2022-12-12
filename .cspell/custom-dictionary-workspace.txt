@@ -1,0 +1,15 @@
+# Custom Dictionary Words
+autofix
+Bracey
+codecov
+CODECOV
+getenv
+isort
+junitxml
+memlimit
+NODELAY
+pipx
+pydocstyle
+pylint
+pytest
+pyupgrade

@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 """Memcache client utility."""
-# standard library
-from typing import Optional, Union
 
 # third-party
 import pymemcache
@@ -15,7 +12,7 @@ class Singleton(type):
     def __call__(cls, *args, **kwargs):
         """Evoke call method."""
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
 
 
@@ -80,9 +77,7 @@ class MemcacheClient(metaclass=Singleton):
         timeout (int, kwargs): Used to set socket timeout values. By default, timeouts are disabled.
     """
 
-    def __init__(
-        self, server: Union[str, tuple] = None, max_pool_size: Optional[int] = None, **kwargs
-    ):
+    def __init__(self, server: str | tuple = None, max_pool_size: int | None = None, **kwargs):
         """Initialize class properties"""
         server = server or ('localhost', 11211)
 
@@ -96,7 +91,7 @@ class MemcacheClient(metaclass=Singleton):
         return self._client
 
 
-def memcache_client(server: Union[str, tuple], **kwargs):
+def memcache_client(server: str | tuple, **kwargs):
     """Return an instance of pymemcache.client.base.Client.
 
     For a full list of kwargs see:

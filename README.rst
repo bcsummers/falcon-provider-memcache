@@ -59,7 +59,7 @@ The memcache_client hook can be applied at the class level or the method level. 
                     title='Internal Server Error',
                 )
 
-    app_middleware = falcon.API()
+    app_middleware = falcon.App()
     app_middleware.add_route('/hook', MemcacheHookResource()
 
 ----------
@@ -85,7 +85,7 @@ When using MemcacheMiddleWare all responder methods will have access to ``self.m
             """Support GET method."""
             key = req.get_param('key')
             try:
-                resp.body = self.memcache_client.get(key)
+                resp.text = self.memcache_client.get(key)
                 resp.status_code = falcon.HTTP_OK
             except ConnectionRefusedError:
                 raise falcon.HTTPInternalServerError(
@@ -94,7 +94,7 @@ When using MemcacheMiddleWare all responder methods will have access to ``self.m
                     title='Internal Server Error',
                 )
 
-    app_middleware = falcon.API(middleware=[MemcacheMiddleware(server=(MEMCACHE_HOST, MEMCACHE_PORT))])
+    app_middleware = falcon.App(middleware=[MemcacheMiddleware(server=(MEMCACHE_HOST, MEMCACHE_PORT))])
     app_middleware.add_route('/middleware', MemcacheMiddleWareResource()
 
 -----------
@@ -108,7 +108,7 @@ After cloning the repository, all development requirements can be installed via 
 
 .. code:: bash
 
-    > pip install falcon-provider-memcache[dev]
+    > poetry install --with dev
     > pre-commit install
 
 Testing
@@ -116,12 +116,13 @@ Testing
 
 .. code:: bash
 
+    > poetry install --with dev,test
     > pytest --cov=falcon_provider_memcache --cov-report=term-missing tests/
 
 .. |build| image:: https://github.com/bcsummers/falcon-provider-memcache/workflows/build/badge.svg
     :target: https://github.com/bcsummers/falcon-provider-memcache/actions
 
-.. |coverage| image:: https://codecov.io/gh/bcsummers/falcon-provider-memcache/branch/master/graph/badge.svg
+.. |coverage| image:: https://codecov.io/gh/bcsummers/falcon-provider-memcache/branch/master/graph/badge.svg?token=UHAZvGDApk
     :target: https://codecov.io/gh/bcsummers/falcon-provider-memcache
 
 .. |code-style| image:: https://img.shields.io/badge/code%20style-black-000000.svg

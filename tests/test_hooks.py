@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Test hooks feature of falcon_provider_memcache module."""
 
 # third-party
