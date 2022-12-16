@@ -33,10 +33,6 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
@@ -93,7 +89,6 @@ ignore = "D202,D203,D213,D301,D400,D406,D407,D413,D415"
 
 [tool.pylint.messages_control]
 disable = [
-    # "bad-continuation",  # C0330
     "duplicate-code",  # R0801
     "fixme",  # W0511
     "invalid-name",  # C0103
