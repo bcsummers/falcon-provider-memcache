@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 """Falcon memcache hook module."""
-# standard library
-from typing import Optional, Union
 
 # third-party
 import falcon
@@ -14,7 +11,7 @@ def memcache_client(
     resp: falcon.Response,
     resource: object,
     params: dict,
-    server: Optional[Union[str, tuple]] = None,
+    server: str | tuple | None = None,
     **kwargs
 ):  # pylint: disable=unused-argument
     """Provide an instance of memcache client to method via resource.

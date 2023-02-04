@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 """Falcon memcache middleware module."""
-# standard library
-from typing import Optional, Union
 
 # third-party
 import falcon
@@ -32,7 +29,7 @@ class MemcacheMiddleware:
             disabled.
     """
 
-    def __init__(self, server: Optional[Union[str, tuple]] = None, **kwargs):
+    def __init__(self, server: str | tuple | None = None, **kwargs):
         """Initialize class properties."""
         server = server or ('localhost', 11211)
         self.memcache_client = MemcacheClient(server, **kwargs).client

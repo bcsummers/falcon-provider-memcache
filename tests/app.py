@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Falcon app used for testing."""
 # standard library
 import os
@@ -20,39 +19,43 @@ class MemcacheHookResource:
 
     @falcon.before(memcache_client, server=(MEMCACHE_HOST, MEMCACHE_PORT))
     def on_get(
-        self, req: falcon.Request, resp: falcon.Response,
+        self,
+        req: falcon.Request,
+        resp: falcon.Response,
     ):
         """Support GET method."""
         key: str = req.get_param('key')
         try:
-            resp.body = self.memcache_client.get(key)  # pylint: disable=no-member
+            resp.text = self.memcache_client.get(key)  # pylint: disable=no-member
             resp.status_code = falcon.HTTP_OK
-        except ConnectionRefusedError:
+        except ConnectionRefusedError as ex:
             raise falcon.HTTPInternalServerError(
                 code=1234,
                 description='Unexpected error occurred while retrieving data.',
                 title='Internal Server Error',
-            )
+            ) from ex
 
     @falcon.before(memcache_client, server=(MEMCACHE_HOST, MEMCACHE_PORT))
     def on_post(
-        self, req: falcon.Request, resp: falcon.Response,
+        self,
+        req: falcon.Request,
+        resp: falcon.Response,
     ):
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
         try:
-            resp.body = str(self.memcache_client.set(key, value))  # pylint: disable=no-member
+            resp.text = str(self.memcache_client.set(key, value))  # pylint: disable=no-member
             resp.status_code = falcon.HTTP_OK
-        except ConnectionRefusedError:
+        except ConnectionRefusedError as ex:
             raise falcon.HTTPInternalServerError(
                 code=1234,
                 description='Unexpected error occurred while retrieving data.',
                 title='Internal Server Error',
-            )
+            ) from ex
 
 
-app_hook = falcon.API()
+app_hook = falcon.App()
 app_hook.add_route('/hook', MemcacheHookResource())
 
 
@@ -60,36 +63,40 @@ class MemcacheMiddleWareResource:
     """Memcache middleware testing resource."""
 
     def on_get(
-        self, req: falcon.Request, resp: falcon.Response,
+        self,
+        req: falcon.Request,
+        resp: falcon.Response,
     ):
         """Support GET method."""
         key = req.get_param('key')
         try:
-            resp.body = self.memcache_client.get(key)  # pylint: disable=no-member
+            resp.text = self.memcache_client.get(key)  # pylint: disable=no-member
             resp.status_code = falcon.HTTP_OK
-        except ConnectionRefusedError:
+        except ConnectionRefusedError as ex:
             raise falcon.HTTPInternalServerError(
                 code=1234,
                 description='Unexpected error occurred while retrieving data.',
                 title='Internal Server Error',
-            )
+            ) from ex
 
     def on_post(
-        self, req: falcon.Request, resp: falcon.Response,
+        self,
+        req: falcon.Request,
+        resp: falcon.Response,
     ):
         """Support POST method."""
         key: str = req.get_param('key')
         value: str = req.get_param('value')
         try:
-            resp.body = str(self.memcache_client.set(key, value))  # pylint: disable=no-member
+            resp.text = str(self.memcache_client.set(key, value))  # pylint: disable=no-member
             resp.status_code = falcon.HTTP_OK
-        except ConnectionRefusedError:
+        except ConnectionRefusedError as ex:
             raise falcon.HTTPInternalServerError(
                 code=1234,
                 description='Unexpected error occurred while retrieving data.',
                 title='Internal Server Error',
-            )
+            ) from ex
 
 
-app_middleware = falcon.API(middleware=[MemcacheMiddleware(server=(MEMCACHE_HOST, MEMCACHE_PORT))])
+app_middleware = falcon.App(middleware=[MemcacheMiddleware(server=(MEMCACHE_HOST, MEMCACHE_PORT))])
 app_middleware.add_route('/middleware', MemcacheMiddleWareResource())
